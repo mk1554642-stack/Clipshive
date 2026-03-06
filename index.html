@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClipsHive | Premium Content Agency</title>
+    <!-- OPTIMIZATION: Preconnect to Cloudinary to save ~100ms on connection setup -->
+    <link rel="preconnect" href="https://res.cloudinary.com" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #020202; /* Deepest Matte Black */
+        color: #ffffff;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* 
+       * STYLE REFERENCE: "ALGORITHM" GOLD (REFINED)
+       * Smoother transitions to prevent banding and increase luxury feel.
+       */
+      .text-gold-gradient {
+        background: linear-gradient(
+          135deg,
+          #FBF2C0 10%,
+          #E5C365 40%, 
+          #D4AF37 60%,
+          #907020 90%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.15)); 
+      }
+
+      /* 
+       * THE "WITH CLIPPING" TEXT
+       * Matches refined gold style.
+       */
+      .text-lux-black-gold {
+        background: linear-gradient(
+          135deg,
+          #FBF2C0 10%,
+          #E5C365 40%, 
+          #D4AF37 60%,
+          #907020 90%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        
+        /* 
+         * GLOW REMOVED as requested.
+         * Pure gradient text.
+         */
+        filter: none;
+      }
+
+      /* 
+       * BUTTON GRADIENT
+       * Smoother gradient stops.
+       */
+      .bg-gold-gradient {
+        background: linear-gradient(
+          to bottom,
+          #FBF2C0 0%,
+          #E5C365 45%, 
+          #D4AF37 55%,
+          #AA8526 100%
+        );
+        /* Added subtle inner highlight for depth */
+        border: 1px solid rgba(255, 255, 255, 0.4); 
+        box-shadow: 
+            0 10px 30px -5px rgba(212, 175, 55, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+      
+      .bg-gold-gradient:hover {
+        background: linear-gradient(
+          to bottom,
+          #FFFDE7 0%,
+          #F2D685 45%, 
+          #E3C04D 55%,
+          #C49A30 100%
+        );
+        box-shadow: 
+            0 0 50px -10px rgba(212, 175, 55, 0.5),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      }
+
+      /* 
+       * GLASS CARDS
+       * Reduced opacity and refined blur for "Expensive Glass" look.
+       */
+      .card-3d {
+        background: linear-gradient(180deg, rgba(15, 15, 15, 0.6) 0%, rgba(5, 5, 5, 0.8) 100%);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.9);
+      }
+      
+      .card-3d:hover {
+        border-color: rgba(219, 192, 120, 0.15); /* Subtle Champagne */
+        box-shadow: 
+          0 40px 80px -20px rgba(0, 0, 0, 0.95),
+          0 0 40px -10px rgba(219, 192, 120, 0.1);
+      }
+
+      /* Section Glow */
+      .glow-section {
+        position: relative;
+        background-color: rgba(5, 5, 5, 0.3); 
+        border-top: 1px solid rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+      }
+
+      /* Animations */
+      
+      @keyframes scroll {
+        0% { transform: translate3d(0, 0, 0); }
+        100% { transform: translate3d(-100%, 0, 0); }
+      }
+      .animate-scroll {
+        animation: scroll 40s linear infinite;
+        will-change: transform;
+      }
+
+      /* RESTORED: Blur and Scale for premium feel - FASTER (1.3s) */
+      @keyframes blur-slide-up {
+        0% { opacity: 0; transform: translate3d(0, 10px, 0) scale3d(0.99, 0.99, 1); filter: blur(10px); }
+        100% { opacity: 1; transform: translate3d(0, 0, 0) scale3d(1, 1, 1); filter: blur(0); }
+      }
+      .animate-blur-slide-up {
+        animation: blur-slide-up 1.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        opacity: 0;
+        will-change: transform, opacity, filter;
+      }
+      
+      /* NEW: Masked Slide Up for Title Reveal */
+      @keyframes mask-up {
+        0% { transform: translate3d(0, 110%, 0); }
+        100% { transform: translate3d(0, 0, 0); }
+      }
+      .animate-mask-up {
+        animation: mask-up 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        transform: translate3d(0, 110%, 0); /* Start hidden below */
+        will-change: transform;
+      }
+      
+      /* NEW: Smooth Blur Fade for Title - FASTER (1.4s) */
+      @keyframes smooth-blur-fade {
+        0% { opacity: 0; filter: blur(15px); transform: translate3d(0, 10px, 0); }
+        100% { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0); }
+      }
+      .animate-smooth-blur-fade {
+        animation: smooth-blur-fade 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        opacity: 0;
+        will-change: transform, opacity, filter;
+      }
+      
+      /* FASTER (1.3s) */
+      @keyframes soft-blur-up {
+        0% { opacity: 0; filter: blur(8px); transform: translate3d(0, 5px, 0); }
+        100% { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0); }
+      }
+      .animate-soft-blur-up {
+        animation: soft-blur-up 1.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        opacity: 0;
+        will-change: transform, opacity, filter;
+      }
+
+      /* 
+       * OPTIMIZED BLUR REVEAL
+       * Solves lag by:
+       * 1. Low Blur Radius (3px) - Drastically cheaper than 10px.
+       * 2. Short Duration (0.7s) - Reduces concurrent active animations.
+       * 3. GPU Layers - translateZ(0) forces hardware acceleration.
+       */
+      @keyframes optimized-reveal {
+        0% { opacity: 0; filter: blur(3px); transform: translate3d(0, 12px, 0); }
+        100% { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0); }
+      }
+      .animate-optimized-reveal {
+        animation: optimized-reveal 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        opacity: 0;
+        will-change: transform, opacity, filter;
+        transform: translateZ(0); /* Force GPU Layer */
+      }
+
+      /* FASTER (1.3s) */
+      @keyframes premium-btn-up {
+        0% { opacity: 0; transform: translate3d(0, 10px, 0); filter: blur(5px); }
+        100% { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
+      }
+      .animate-premium-btn {
+        animation: premium-btn-up 1.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        opacity: 0;
+        will-change: transform, opacity, filter;
+      }
+      
+      /* FASTER (1.6s) */
+      @keyframes expand-line {
+        0% { transform: scale3d(0, 1, 1); opacity: 0; }
+        100% { transform: scale3d(1, 1, 1); opacity: 1; }
+      }
+      .animate-expand-line {
+        animation: expand-line 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        transform-origin: center;
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+      
+      /* FASTER (1.6s) */
+      @keyframes minimalist-fade {
+        0% { opacity: 0; transform: translate3d(0, 5px, 0); filter: blur(4px); }
+        100% { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
+      }
+      .animate-minimalist-fade {
+        animation: minimalist-fade 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        opacity: 0;
+        will-change: transform, opacity, filter;
+      }
+
+      /* ANIMATION FOR BORDER SPIN - Slightly faster (11s) */
+      @keyframes spin-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .animate-spin-slow {
+        animation: spin-slow 11s linear infinite;
+      }
+
+      /* Utilities - Faster Delays */
+      .delay-200 { animation-delay: 0.16s; }
+      .delay-300 { animation-delay: 0.24s; }
+      .delay-400 { animation-delay: 0.32s; }
+      .delay-500 { animation-delay: 0.4s; }
+      .delay-700 { animation-delay: 0.56s; }
+      .delay-800 { animation-delay: 0.64s; }
+      .delay-1200 { animation-delay: 0.96s; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.22.3?deps=react@^19.2.3,react-dom@^19.2.3",
+    "framer-motion": "https://esm.sh/framer-motion@11.0.8?deps=react@^19.2.3,react-dom@^19.2.3",
+    "lenis": "https://esm.sh/lenis@^1.3.17"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <!-- Clean Body, No Noise Div -->
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
